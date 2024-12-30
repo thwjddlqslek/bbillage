@@ -5,7 +5,8 @@ import styles from "../styles/layout.module.css";
 import slides from "../styles/components/slider.module.css";
 import Image from "next/image";
 
-export default function Slider() {
+const Slider = () => {
+  /* https://swiperjs.com/ */
   const [currentSlide, setCurrentSlide] = useState(0);
   const [startX, setStartX] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
@@ -114,4 +115,6 @@ export default function Slider() {
       </div>
     </div>
   );
-}
+};
+
+export default Slider;

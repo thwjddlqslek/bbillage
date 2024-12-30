@@ -15,17 +15,18 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body>
-        <Header onEventDataFetch={setEventData} />
-        <Slider />
-        {eventData ? (
-          <div>
-            이벤트 목록
-            {JSON.stringify(eventData)}
-          </div>
-        ) : (
-          children
-        )}
+      <body
+        style={{
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <div style={{ flex: "1 0 auto" }}>
+          <Header />
+          <Slider />
+          {children}
+        </div>
         <Footer />
       </body>
     </html>

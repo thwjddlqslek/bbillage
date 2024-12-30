@@ -1,0 +1,53 @@
+.container {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  width: 400px;
+  height: 400px;
+}
+
+.main {
+  display: flex;
+  width: 80%;
+  justify-content: center;
+  margin: 20px auto;
+}
+
+.list-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.image {
+  width: 408px;
+  height: 304px;
+  border-radius: 5px;
+}
+
+.status {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.statusEnd {
+  color: red;
+}
+
+.statusOngoing {
+  color: green;
+}
+
+.title {
+  margin-top: 5px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.date {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #888;
+}

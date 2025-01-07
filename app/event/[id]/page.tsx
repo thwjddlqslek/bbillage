@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import styles from "../../styles/PostList.module.css";
+import styles from "@/src/styles/PostList.module.css";
 import Image from "next/image";
 interface EventDetail {
   id: number;

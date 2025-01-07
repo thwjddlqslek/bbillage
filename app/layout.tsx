@@ -1,29 +1,27 @@
 "use client";
 
 import "./globals.css";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import { useState } from "react";
-import Slider from "./components/Slider";
+import Header from "@/src/components/layout/Header";
+import Footer from "@/src/components/layout/Footer";
+import Slider from "@/src/components/layout/Slider";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [eventData, setEventData] = useState(null);
-
   return (
     <html lang="en">
       <body
         style={{
-          minHeight: "100vh",
           display: "flex",
           flexDirection: "column",
+          minHeight: "100vh",
+          margin: 0,
         }}
       >
-        <div style={{ flex: "1 0 auto" }}>
-          <Header />
+        <Header />
+        <div>
           <Slider />
           {children}
         </div>

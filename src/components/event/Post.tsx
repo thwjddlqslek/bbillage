@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouter } from "next/navigation";
-import "./Post.css";
-import Calendar from "./icons/Calendar";
+import styles from "@/src/styles/Post.module.css";
+import Calendar from "@/src/components/icons/Calendar";
 import Image from "next/image";
 
 interface PostProps {
@@ -28,7 +28,7 @@ const Post: React.FC<PostProps> = ({
   };
 
   return (
-    <div className="post-container" onClick={handleClick}>
+    <div className={styles["footer-banner"]} onClick={handleClick}>
       <Image
         src={imageUrl}
         className="image"
@@ -39,12 +39,12 @@ const Post: React.FC<PostProps> = ({
       <span className={`badge ${status === 1 ? "ongoing" : "ended"}`}>
         {status === 1 ? "진행중" : "종료"}
       </span>
-      <p className="title">{title}</p>
-      <div className="date-container">
+      <p className={styles["title"]}>{title}</p>
+      <div className={styles["date-container"]}>
         <Calendar />
-        <p className="date">{startDate}</p>
+        <p className={styles["date"]}>{startDate}</p>
         <p> ~ </p>
-        <p className="date">{endDate}</p>
+        <p className={styles["date"]}>{endDate}</p>
       </div>
     </div>
   );

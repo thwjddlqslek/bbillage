@@ -1,4 +1,4 @@
-import styles from "./styles/PostList.module.css";
+import styles from "@/src/styles/PostList.module.css";
 
 export default function Home() {
   return (

@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "../styles/layout.module.css";
+import styles from "@/src/styles/Layout.module.css";
 import Image from "next/image";
 
 const Footer = () => {

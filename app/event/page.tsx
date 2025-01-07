@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Post from "../components/Post";
-import styles from "../styles/PostList.module.css";
+import Post from "@/src/components/event/Post";
+import styles from "@/src/styles/PostList.module.css";
 
 interface EventData {
   data: {

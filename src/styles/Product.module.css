@@ -1,0 +1,15 @@
+.select-box {
+  height: 48px;
+  width: 190px;
+  font-family: p-m;
+  font-size: 14px;
+  padding-right: 40px;
+  border-radius: 5px;
+  background: #eee;
+  border: none;
+  color: #1f1f1f;
+}
+
+.select-box:focus {
+  border-color: #007bff;
+}

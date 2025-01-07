@@ -1,8 +1,7 @@
 "use client";
 
 import { useState, MouseEvent, TouchEvent } from "react";
-import styles from "../styles/layout.module.css";
-import slides from "../styles/components/slider.module.css";
+import slides from "@/src/styles/Slider.module.css";
 import Image from "next/image";
 
 const Slider = () => {

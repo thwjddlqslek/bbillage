@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 빌리지(Billage) 프론트엔드 프로젝트 💷 💴
 
-## Getting Started
+빌리지(Billage)는 안전한 거래를 위한 채팅 기능을 제공하는 렌탈 플랫폼입니다.  
+사용자는 채팅을 통해 정확한 렌탈 일정, 렌탈료, 거래 방법을 논의할 수 있으며, 제공되는 프로세스 가이드를 따라 쉽고 안전하게 거래를 진행할 수 있습니다.  
+간단한 정보 입력만으로 렌탈 용품을 등록할 수 있고, 렌탈 중인 상품과 렌탈 받은 상품 목록을 한눈에 확인할 수 있습니다.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 프로젝트 개요
+
+이 프로젝트는 빌리지 플랫폼의 **Event 페이지**와 **'빌려드려요' 페이지**를 구현하는 프론트엔드 프로젝트입니다.  
+Next.js 프레임워크를 사용하여 개발되었으며, TypeScript를 적용하여 코드의 안정성과 유지보수성을 높였습니다.
+
+---
+
+## 기술 스택
+
+- **Next.js** 15.0.3  
+- **React** 19.0.0  
+- **TypeScript** 5.0  
+- **ESLint** 8.0  
+- **React DOM** 19.0.0  
+
+---
+
+## 프로젝트 구조
+
+이 프로젝트는 Next.js 15의 **앱 디렉토리 구조**를 도입하여 클라이언트 컴포넌트와 서버 컴포넌트를 분리하였습니다.  
+이를 통해 서버 측 렌더링과 클라이언트 측 렌더링을 효과적으로 활용하고, 코드의 가독성과 유지보수성을 높일 수 있었습니다.
+
+```
+billage    
+├── app  // Next.js 앱 디렉토리 (라우트와 서버 컴포넌트 관리)   
+│ ├── api  // API 엔드포인트 정의   
+│ ├── event  // Event 페이지 관련 서버 컴포넌트  
+│ └── lend  // '빌려드려요' 페이지 관련 서버 컴포넌트   
+├── public  // 정적 파일 (이미지, 아이콘 등) 저장   
+├── src  // 클라이언트 측 컴포넌트 및 로직 관리  
+│ ├── components  // 재사용 가능한 컴포넌트 모음   
+│ │ ├── common  // 공통으로 사용되는 컴포넌트  
+│ │ ├── event  // Event 페이지 관련 컴포넌트  
+│ │ ├── icons  // SVG 및 아이콘 컴포넌트  
+│ │ ├── layout  // 레이아웃 구성 컴포넌트  
+│ │ ├── product  // 상품 관련 컴포넌트  
+│ │ └── container  // 페이지 내 주요 컨테이너 컴포넌트   
+│ ├── services  // API 호출 및 데이터 처리 로직  
+├── styles  // 프로젝트 전역 및 컴포넌트 스타일 정의   
+├── types  // TypeScript 타입 정의
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 개발 과정
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **서버 컴포넌트 개발**  
+   - API 엔드포인트 구현  
+   - 데이터 패칭 및 처리 로직 구현  
+2. **클라이언트 컴포넌트 개발**  
+   - 페이지 컴포넌트 구현  
+   - 재사용 가능한 컴포넌트 개발  
+   - 상태 관리 및 이벤트 처리 로직 구현  
+3. **스타일링 및 반응형 디자인 적용 진행중**  
+4. **코드 리팩토링 진행중**  
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 진행 상황
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+이 프로젝트는 **2024년 11월**부터 시작되었으며, 현재까지 진행하고 있습니다.  
+기능 구현과 함께 지속적인 리팩토링과 성능 최적화를 관심을 두고 개발하고 있습니다.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

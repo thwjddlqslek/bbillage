@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { ProductFilters } from "@/src/components/product/ProductFilters";
 import { ProductList } from "@/src/components/product/ProductList";
 import { Product, Category, Town1, Town2 } from "@/src/types/lend";
+import { productService } from "@/src/services/lend";
 
 export const ProductListContainer: React.FC = () => {
   interface FilterData {
@@ -29,17 +30,14 @@ export const ProductListContainer: React.FC = () => {
   useEffect(() => {
     const fetchInitialData = async () => {
       const [towns1Response, categoriesResponse] = await Promise.all([
-        fetch("/api/noauth/getTowns1"),
-        fetch("/api/getCategory"),
+        productService.getTowns1(),
+        productService.getCategories(),
       ]);
-
-      const towns1Data = await towns1Response.json();
-      const categoriesData = await categoriesResponse.json();
 
       setFilterData((prev) => ({
         ...prev,
-        towns1: towns1Data.data.list || [],
-        categories: categoriesData.data.categoryList || [],
+        towns1: towns1Response || [],
+        categories: categoriesResponse || [],
       }));
     };
     fetchInitialData();
@@ -49,52 +47,45 @@ export const ProductListContainer: React.FC = () => {
   useEffect(() => {
     if (selectedTown1) {
       const fetchTowns2Data = async () => {
-        const data = await Promise.all([
-          fetch(`/api/noauth/getTowns2?sigunguName=${selectedTown1}`),
-        ]);
-        const towns2Data = await data[0].json();
-        setFilterData((prev) => ({
-          ...prev,
-          towns2: towns2Data.data.list || [],
-        }));
+        try {
+          const towns2Response = await productService.getTowns2(selectedTown1);
+          setFilterData((prev) => ({
+            ...prev,
+            towns2: towns2Response || [],
+          }));
+        } catch (error) {
+          console.log("fetchTowns2Data error:", error);
+          setFilterData((prev) => ({
+            ...prev,
+            towns2: [],
+          }));
+        }
       };
       fetchTowns2Data();
     } else {
-      setFilterData((prev) => ({
-        ...prev,
-        towns2: [],
-      }));
     }
   }, [selectedTown1]);
 
   // 상품 데이터 로딩
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchFilteredProducts = async () => {
       setIsLoading(true);
       try {
-        const params = new URLSearchParams({
-          status: "0",
-          filter: "0",
-          page: "0",
-          size: "20",
-          signIn: "0",
+        // productService의 getProducts 메서드 활용
+        const productsData = await productService.getProducts({
+          categories: selectedCategory,
+          keyword: searchKeyword,
+          towns: selectedTown2?.toString(),
         });
-
-        if (searchKeyword) params.append("keyword", searchKeyword);
-        if (selectedTown2) params.append("towns", selectedTown2.toString());
-        if (selectedCategory) params.append("categories", selectedCategory);
-
-        const response = await fetch(`/api/noauth/getMainList?${params}`);
-        const result = await response.json();
-        setProducts(result.data?.rentals || []);
+        setProducts(productsData);
       } catch (error) {
-        console.error("getMainList error:", error);
+        console.error("fetchFilteredProducts error:", error);
         setProducts([]);
       } finally {
         setIsLoading(false);
       }
     };
-    fetchProducts();
+    fetchFilteredProducts();
   }, [searchKeyword, selectedTown2, selectedCategory]);
 
   return (

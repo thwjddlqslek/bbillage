@@ -1,6 +1,7 @@
 const nextConfig = {
   env: {
     BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
+    BASE_URL_2: process.env.NEXT_PUBLIC_BASE_URL_2,
   },
   images: {
     remotePatterns: [
@@ -22,7 +23,7 @@ const nextConfig = {
       },
       {
         source: "/api/:path*",
-        destination: "https://frontapi.bbillage.com:8080/api/:path*",
+        destination: `${process.env.NEXT_PUBLIC_BASE_URL_2}/api/:path*`,
       },
     ];
   },

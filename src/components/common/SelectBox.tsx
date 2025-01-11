@@ -1,5 +1,5 @@
 "use client";
-import styles from "@/src/styles/Product.module.css";
+import styles from "@/src/styles/ProductList.module.css";
 
 interface SelectOption {
   value: string | number;

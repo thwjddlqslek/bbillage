@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import styles from "@/src/styles/Post.module.css";
-import Calendar from "@/src/components/icons/Calendar";
+import Calendar from "@/public/icons/Calendar";
 import Image from "next/image";
 
 interface PostProps {

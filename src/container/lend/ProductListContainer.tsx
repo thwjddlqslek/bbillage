@@ -5,43 +5,33 @@ import { ProductFilters } from "@/src/components/product/ProductFilters";
 import { ProductList } from "@/src/components/product/ProductList";
 import { Product, Category, Town1, Town2 } from "@/src/types/lend";
 import { productService } from "@/src/services/lend";
+import { ProductListFilters } from "@/src/types/lend";
+import styles from "@/src/styles/ProductList.module.css";
 
-export const ProductListContainer: React.FC = () => {
-  interface FilterData {
-    towns1: Town1[];
-    towns2: Town2[];
-    categories: Category[];
-  }
+interface FilterData {
+  towns1: Town1[];
+  towns2: Town2[];
+  categories: Category[];
+}
 
+export const ProductListContainer: React.FC<ProductListFilters> = ({
+  initialProducts,
+  initialCategories,
+  initialTowns1,
+}) => {
   const [filterData, setFilterData] = useState<FilterData>({
-    towns1: [],
+    towns1: initialTowns1 || [],
     towns2: [],
-    categories: [],
+    categories: initialCategories || [],
   });
   const [selectedTown1, setSelectedTown1] = useState("");
   const [selectedTown2, setSelectedTown2] = useState<number | null>(null);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [searchKeyword, setSearchKeyword] = useState("");
-
+  const [page, setPage] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-
-  // 초기 데이터 로딩
-  useEffect(() => {
-    const fetchInitialData = async () => {
-      const [towns1Response, categoriesResponse] = await Promise.all([
-        productService.getTowns1(),
-        productService.getCategories(),
-      ]);
-
-      setFilterData((prev) => ({
-        ...prev,
-        towns1: towns1Response || [],
-        categories: categoriesResponse || [],
-      }));
-    };
-    fetchInitialData();
-  }, []);
 
   // town2 데이터 로딩
   useEffect(() => {
@@ -67,29 +57,65 @@ export const ProductListContainer: React.FC = () => {
   }, [selectedTown1]);
 
   // 상품 데이터 로딩
-  useEffect(() => {
-    const fetchFilteredProducts = async () => {
-      setIsLoading(true);
-      try {
-        // productService의 getProducts 메서드 활용
-        const productsData = await productService.getProducts({
-          categories: selectedCategory,
-          keyword: searchKeyword,
-          towns: selectedTown2?.toString(),
-        });
+  const fetchFilteredProducts = async (currentPage: number) => {
+    setIsLoading(true);
+    if (
+      currentPage === 0 &&
+      !selectedCategory &&
+      !searchKeyword &&
+      !selectedTown2
+    ) {
+      setProducts(initialProducts || []);
+      setHasMore(initialProducts?.length === 20);
+      setIsLoading(false);
+      return;
+    }
+    try {
+      const productsData = await productService.getProducts({
+        categories: selectedCategory,
+        keyword: searchKeyword,
+        towns: selectedTown2?.toString(),
+        size: "20",
+        page: currentPage.toString(),
+      });
+      if (currentPage === 0) {
         setProducts(productsData);
-      } catch (error) {
-        console.error("fetchFilteredProducts error:", error);
-        setProducts([]);
-      } finally {
-        setIsLoading(false);
+      } else {
+        setProducts((prev) => {
+          const existingIds = new Set(prev.map((p) => p.rentalSeq));
+          const uniqueNewProducts = productsData.filter(
+            (p) => !existingIds.has(p.rentalSeq)
+          );
+          return [...prev, ...uniqueNewProducts];
+        });
       }
-    };
-    fetchFilteredProducts();
-  }, [searchKeyword, selectedTown2, selectedCategory]);
+      setHasMore(productsData.length === 20);
+    } catch (error) {
+      console.error("fetchFilteredProducts error:", error);
+      setProducts([]);
+      setHasMore(false);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    setProducts([]);
+    setPage(0);
+    fetchFilteredProducts(0);
+  }, [selectedTown2, selectedCategory, searchKeyword]);
+
+  const handleLoadMore = () => {
+    if (!isLoading && hasMore) {
+      setPage((prev) => {
+        fetchFilteredProducts(prev + 1);
+        return prev + 1;
+      });
+    }
+  };
 
   return (
-    <div>
+    <div className={styles["product-wrap"]}>
       <ProductFilters
         filterData={filterData}
         selectedTown1={selectedTown1}
@@ -101,7 +127,12 @@ export const ProductListContainer: React.FC = () => {
         onCategoryChange={setSelectedCategory}
         onSearchChange={setSearchKeyword}
       />
-      <ProductList products={products} isLoading={isLoading} />
+      <ProductList
+        products={products}
+        isLoading={isLoading}
+        onLoad={handleLoadMore}
+        hasMore={hasMore}
+      />
     </div>
   );
 };

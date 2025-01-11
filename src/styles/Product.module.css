@@ -1,15 +1,125 @@
-.select-box {
-  height: 48px;
-  width: 190px;
-  font-family: p-m;
-  font-size: 14px;
-  padding-right: 40px;
-  border-radius: 5px;
-  background: #eee;
-  border: none;
-  color: #1f1f1f;
+.container {
+  /* 상품과 다른 대여 상품 */
+  width: 844px;
+  margin: 40px auto 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  z-index: 0;
 }
 
-.select-box:focus {
-  border-color: #007bff;
+/* 최상단 컨테이너 */
+
+.top-wrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+.user-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  font-weight: bold;
+
+  & span {
+    display: flex;
+    flex-direction: row;
+    color: #ff3855;
+    font-size: 16px;
+  }
+}
+
+.star-wrap {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  & p {
+    color: #1f1f1f;
+    margin-left: 8px;
+  }
+}
+
+/* 상품 정보 */
+
+.product-info {
+  margin-top: 30px;
+  margin-bottom: 8px;
+
+  & h1 {
+    font-family: p-b;
+    color: #1f1f1f;
+    font-size: 20px;
+  }
+}
+
+.fee-wrap {
+  margin-top: 8px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  & p {
+    color: #1f1f1f;
+    font-size: 20px;
+    font-weight: bold;
+  }
+}
+
+.grey-wrap {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 25px;
+  color: #777;
+
+  & p {
+    font-size: 16px;
+    font-family: p-r;
+    margin-left: 8px;
+  }
+}
+
+.content {
+  font-family: p-m;
+  font-size: 16px;
+  line-height: 26px;
+  color: #1f1f1f;
+  white-space: break-spaces;
+  word-break: keep-all;
+  padding-bottom: 25px;
+}
+
+/* 버튼 디자인 */
+
+.btn-wrap {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.btn-base {
+  width: 408px;
+  height: 57px;
+  border-radius: 10px;
+  font-family: p-m;
+  font-size: 18px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.calendar-btn {
+  background: #fff;
+  color: #1f1f1f;
+  border: 1px solid #e8e8e8;
+}
+
+.rental-btn {
+  background-color: #ff3855;
+  border: none;
+  color: #fff;
 }

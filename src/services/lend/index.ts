@@ -58,6 +58,7 @@ export const productService = {
         ...(params.categories && { categories: params.categories }),
         ...(params.keyword && { keyword: params.keyword }),
         ...(params.towns && { towns: params.towns }),
+        ...(params.page && { page: params.page }),
       });
 
       const response = await fetch(`${API_ROUTES.PRODUCTS}?${queryParams}`);

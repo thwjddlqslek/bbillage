@@ -2,6 +2,7 @@
 
 import { SelectBox } from "@/src/components/common/SelectBox";
 import { SearchInput } from "@/src/components/common/SearchInput";
+import styles from "@/src/styles/ProductList.module.css";
 
 interface FilterData {
   towns1: Array<{ sigunguName: string }>;
@@ -54,8 +55,8 @@ export const ProductFilters: React.FC<ProductFiltersProps> = ({
     : [];
 
   return (
-    <div>
-      <div>
+    <div className={styles["select-input-container"]}>
+      <div className={styles["select-box-container"]}>
         <SelectBox
           options={town1Options}
           value={selectedTown1}

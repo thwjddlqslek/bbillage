@@ -1,0 +1,57 @@
+.container {
+  width: 440px;
+  padding: 16px;
+  z-index: 1;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 20px;
+  font-family: p-b;
+}
+
+.calendar {
+  /* 캘린더 전체 스타일 */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.navigation {
+  /* 네비게이션 버튼 스타일 */
+  background-color: #f0f0f0;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.label {
+  /* 연월 라벨 스타일 */
+  font-weight: bold;
+}
+
+.days {
+  /* 요일 스타일 */
+  background-color: #f9f9f9;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  padding: 5px;
+}
+
+.day {
+  padding: 5px;
+  text-align: center;
+  background: white;
+  border: none;
+  font-size: 20px;
+}
